@@ -5,6 +5,7 @@ class Config:
     '''
     QUOTES_API_URL = 'http://quotes.stormconsultancy.co.uk/random.json'
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:tom@localhost/blogapp'
+    SECRET_KEY = os.environ.get('SECRET_KEY')
 
 
 class ProdConfig(Config):

@@ -1,6 +1,7 @@
 from flask import render_template
 from ..request import get_quotes
 from . import main
+from flask_login import login_required
 
 @main.route('/')
 def index():
