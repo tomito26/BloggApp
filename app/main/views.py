@@ -2,7 +2,7 @@ from flask import render_template,redirect,flash,url_for
 from ..request import get_quotes
 from .forms import  BlogForm, CommentsForm
 from . import main
-from .. import db
+from .. import db,photos
 from flask_login import login_required,current_user
 from ..models import User,Blog,Comment
 @main.route('/')
@@ -56,6 +56,9 @@ def new_comment(id):
     return render_template('new_comment.html',comment_form=form)
 
 @main.route('/user/uname>/update/pic',methods =['Post'])
-    
+@login_required
+def update_pic(uname):
+    user = User.query.filter_by(username=uname).first()
+    if'photo' in request.files
     
  
