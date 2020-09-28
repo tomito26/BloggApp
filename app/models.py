@@ -24,7 +24,11 @@ class User(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     username = db.Column(db.String(255))
     role_id =db.Column(db.Integer,db.ForeignKey('roles.id'))
+    email = db.Column(db.String(255),unique=True, index = True)
     password_hash=db.Column(db.String(255))
+    bio = db.Column(db.String(255))
+    profile_pic_path= db.Column(db.String)
+    blog = db.relationship('Blog',backref='user',lazy='dynamic')
 
     @property
     def password(self):
@@ -56,8 +60,8 @@ class Blog(db.Model):
     __tablename__ = 'blog'
 
     id=db.Column(db.Integer,primary_key=True)
-    blog_title=db.Column(db.String)
-    blog_content=db.Column(db.String)
+    title=db.Column(db.String)
+    content=db.Column(db.String)
     date=db.Column(db.DateTime, default=datetime.utcnow)
     user_id=db.Column(db.Integer,db.ForeignKey('users.id'))
     comments=db.relationship('Comment',backref = 'blog',lazy='dynamic')
@@ -106,3 +110,9 @@ class Comment(db.Model):
     @classmethod
     def clear_commwnts(cls):
         Comment.all_comments.clear
+        
+
+class Subscribe(db.Model):
+    __tablename__ = 'subscribers'
+    id = db.Column(db.Integer,primary_key=True)
+    email = db.Column(db.String(50))
