@@ -1,10 +1,13 @@
-from flask import render_template,redirect,flash,url_for
+from flask import render_template,redirect,flash,url_for,request
 from ..request import get_quotes
-from .forms import  BlogForm, CommentsForm
+from .forms import  BlogForm, CommentsForm,UpdateProfile
 from . import main
 from .. import db,photos
 from flask_login import login_required,current_user
 from ..models import User,Blog,Comment
+from ..email import mail_message
+import markdown2
+
 @main.route('/')
 def index():
     '''
@@ -55,10 +58,15 @@ def new_comment(id):
         return redirect(url_for('main.post',post_id=id))
     return render_template('new_comment.html',comment_form=form)
 
-@main.route('/user/uname>/update/pic',methods =['Post'])
+@main.route('/user/uname>/update/pic',methods =['POST'])
 @login_required
 def update_pic(uname):
     user = User.query.filter_by(username=uname).first()
-    if'photo' in request.files
+    if 'photo' in request.files:
+        filename = photos.save(request.files['photo'])
+        path= f'photo/{filename}'
+        user.profile_pic_path = path
+        db.session.commit()
+    return redirect(url_for('main.profile',uname=uname))
     
  
