@@ -26,12 +26,13 @@
                 </div>
             </div>
             <div class="col-lg- col-md-6 mx- tex-center">
+                <h1 class="text-center pb-5">Blogs</h1>
                 {% for blog in blog_items %}
                 <div class="post-preview text-center">
                     <a href="{{ url_for('main.post', blog_id=blog.id)}}">
-                        <h2 class="post-title">
+                        <h3 class="post-title">
                             {{blog.title}}
-                        </h2>
+                        </h3>
                     </a>
                     <p class="post-meta">Posted by {{blog.user.username}} on {{blog.date.strftime('%B %d, %Y')}}</p>
                 </div>

@@ -2,9 +2,9 @@
 {% import 'bootstrap/wtf.html' as wtf%}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
+    <div class="container pt-5">
+        <div class="row pb-5">
+            <div class="col-lg-8 col-md-10 mx-auto pb-5">
                 <!--Flash message -->
                 {% for message in get_flashed_messages() %}
                 <div class="alert alert-danger">
