@@ -2,16 +2,20 @@
 {% import 'bootstrap/wtf.html' as wtf%}
 
 {% block content %}
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="page-heading">
-                    {{ wtf.quick_form(comment_form) }}
-                    <span class="subheading"></span>
+    <section>
+        <div class="overlay d-flex justify-content-center align-items-center text-center"
+            style="background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(../static/images/pexels-andrea-piacquadio-3762806.jpg);height:60vh;background-position:center;background-size:cover;">
+           <h3>Interact with the blogs by commenting and sharing about the impact it has on you</h3>
+        </div>
+        <div class="container pt-5">
+            <div class="row pb-5">
+                <div class="col-lg-8 col-md-10 mx-auto pb-5">
+                    <div class="page-heading">
+                        {{ wtf.quick_form(comment_form) }}
+                        <span class="subheading"></span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
+    </section>
 {% endblock %}

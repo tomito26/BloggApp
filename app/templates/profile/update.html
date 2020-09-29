@@ -2,9 +2,15 @@
 {% import 'bootstrap/wtf.html' as wtf%}
 
 {% block content %}
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
+    <div class="overlay d-flex justify-content-center align-items-center" style="background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(../../static/images/pexels-tranmautritam-69432.jpg);height:90vh;background-size:cover;background-position:center;">
+        <div class="text-center text-white">
+            <h1>Create Profile </h1>
+            <p>Make it possible for other users to interact with your blogs by creating your personal profile</p>
+        </div>
+    
+    </div>
+    <div class="container pt-5">
+        <div class="row pb-5">
             <div class="col-lg- col-md-6 mx-auto">
                 {{wtf.quick_form(form)}}
     
