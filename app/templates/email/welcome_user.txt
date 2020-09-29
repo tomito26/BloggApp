@@ -1,0 +1,4 @@
+Hello
+
+Welcome to blogApp,
+We have just seen you have subscribed for our application and want to welcome you,Please feel free to add blogs and also read other blogs and comment on them

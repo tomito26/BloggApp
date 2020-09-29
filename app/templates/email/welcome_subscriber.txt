@@ -1,0 +1,4 @@
+Hello {{user.username}}
+
+Welcome to blogApp,
+We have just seen you have signed up for our application and want to welcome you,Please feel free to add blogs and also read other blogs and comment on them
