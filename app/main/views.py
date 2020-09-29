@@ -16,19 +16,27 @@ def index():
     title = 'BlogApp-Welcome to blogapp your trusted site for creativity'
     
     quote_item = get_quotes()
-    blog_item = Blog.get_all_blogs()
+    blog_items = Blog.get_all_blogs()
     print(quote_item)
-    return render_template('index.html',title = title , quote_item=quote_item,blog_item=blog_item) 
+    return render_template('index.html',title = title , quote_item=quote_item,blog_items=blog_items) 
 
-@main.route('/post/<int:post_id>',methods=['GET','POST'])
-def post(post_id):
+@main.route('/about')
+def about():
+    '''
+    Function that returns the about page and its contents
+    '''
+    title = 'About'
+    return render_template('about.html')
+
+@main.route('/post/<int:blog_id>',methods=['GET','POST'])
+def post(blog_id):
     '''
     Function that retuns the blog page and its data
     '''
-    post = Blog.query.filter_by(id=post_id).one()
-    post_comments = Comment.get_comments(post_id)
+    blog_item = Blog.query.filter_by(id=blog_id).one()
+    post_comments = Comment.get_comments(blog_id)
     
-    return render_template('post.html',post=post,post_comments=post_comments)
+    return render_template('post.html',blog_item=blog_item,post_comments=post_comments)
 
 @main.route('/createblog',methods=['GET','POST'])
 @login_required
@@ -45,9 +53,9 @@ def createblog():
         db.session.add(new_post)
         db.session.commit()
         return redirect(url_for('main.index'))
-    return render_template('addblog.html',form=form)
+    return render_template('createblog.html',form=form)
 
-@main.route('/post/comments/newblog/<int:id>')
+@main.route('/blog/comments/newblog/<int:id>',methods=['GET','POST'])
 @login_required
 def new_comment(id):
     form = CommentsForm()
@@ -55,7 +63,7 @@ def new_comment(id):
     if form.validate_on_submit():
         new_comment = Comment(blog_id=id,comment=form.comment.data)
         new_comment.save_comments()
-        return redirect(url_for('main.post',post_id=id))
+        return redirect(url_for('main.post',blog_id=id))
     return render_template('new_comment.html',comment_form=form)
 
 @main.route('/user/<uname>/update/pic',methods =['POST'])
@@ -64,7 +72,7 @@ def update_pic(uname):
     user = User.query.filter_by(username=uname).first()
     if 'photo' in request.files:
         filename = photos.save(request.files['photo'])
-        path= f'photo/{filename}'
+        path= f'photos/{filename}'
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
@@ -98,30 +106,28 @@ def update_profile(uname):
     
     return render_template('profile/update.html',form =form)
 
-@main.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
-def update_post(post_id):
-    post = Blog.query.get_or_404(post_id)
+@main.route("/post/<int:blog_id>/update", methods=['GET', 'POST'])
+def update_post(blog_id):
+    post = Blog.query.get_or_404(blog_id)
     if post.user != current_user:
         abort(403)
     form = BlogForm()
     if form.validate_on_submit():
         post.title = form.title.data
-        post.subtitle = form.subtitle.data
         post.content = form.content.data
         
         db.session.commit()
         flash('Your post has been updated!', 'success')
-        return redirect(url_for('main.post', post_id=post.id))
+        return redirect(url_for('main.post', blog_id=post.id))
     elif request.method == 'GET':
         form.title.data = post.title
-        form.subtitle = post.subtitle
         form.content.data = post.content
-    return render_template('add.html', title='Update Post', form=form)
+    return render_template('createblog.html', title='Update Post', form=form)
 
-@main.route("/post/<int:post_id>/delete", methods=['POST'])
+@main.route("/post/<int:blog_id>/delete", methods=['POST'])
 @login_required
-def delete_post(post_id):
-    post = Blog.query.get_or_404(post_id)
+def delete_post(blog_id):
+    post = Blog.query.get_or_404(blog_id)
     if post.user != current_user:
         abort(403)
     db.session.delete(post)

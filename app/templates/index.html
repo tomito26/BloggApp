@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf%}
 
 {% block content %}
     <div class="container-fluid">
@@ -10,24 +11,21 @@
                     </div>
                     <div class="card-body">
                         <blockquote class="blockquote text-center">
-                            <p class="mb-0">{{quotes.quote}}</p>
-                            <footer class="blockquote-footer"><cite>{{quotes.author}}</cite></footer>
+                            <p class="mb-0">{{quote_item.quote}}</p>
+                            <footer class="blockquote-footer"><cite>{{quote_item.author}}</cite></footer>
                         </blockquote>
                     </div>
                 </div>
             </div>
             <div class="col-lg- col-md-6 mx- tex-center">
-                {% for post in posts %}
+                {% for blog in blog_items %}
                 <div class="post-preview text-center">
-                    <a href="{{ url_for('main.post', post_id=post.id)}}">
+                    <a href="{{ url_for('main.post', blog_id=blog.id)}}">
                         <h2 class="post-title">
-                            {{post.title}}
+                            {{blog.title}}
                         </h2>
-                        <h3 class="post-subtitle">
-                            {{post.subtitle}}
-                        </h3>
                     </a>
-                    <p class="post-meta">Posted by {{post.user.username}} on {{post.date.strftime('%B %d, %Y')}}</p>
+                    <p class="post-meta">Posted by {{blog.user.username}} on {{blog.date.strftime('%B %d, %Y')}}</p>
                 </div>
                 <hr>
                 {% endfor %}

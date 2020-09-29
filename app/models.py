@@ -18,7 +18,7 @@ class Quote:
         self.author = author
         self.id = id
 
-class User(db.Model):
+class User(db.Model,UserMixin):
     __tablename__ = 'users'
 
     id=db.Column(db.Integer,primary_key=True)
@@ -57,7 +57,7 @@ class Role(db.Model):
         return f'User {self.name}'
 
 class Blog(db.Model):
-    __tablename__ = 'blog'
+    __tablename__ = 'blogs'
 
     id=db.Column(db.Integer,primary_key=True)
     title=db.Column(db.String)
@@ -93,7 +93,7 @@ class Comment(db.Model):
     
     id=db.Column(db.Integer,primary_key=True)
     comment=db.Column(db.String)
-    blog_id=db.Column(db.Integer,db.ForeignKey('blog.id'))
+    blog_id=db.Column(db.Integer,db.ForeignKey('blogs.id'))
     posted_date=db.Column(db.DateTime,default=datetime.utcnow)
 
     
@@ -108,7 +108,7 @@ class Comment(db.Model):
         return comments
 
     @classmethod
-    def clear_commwnts(cls):
+    def clear_comments(cls):
         Comment.all_comments.clear
         
 

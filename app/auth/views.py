@@ -40,7 +40,7 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        mail_message("Welcome to watchlist",
+        mail_message("Welcome to BlogApp",
                      "email/welcome_subscriber",
                      user.email,
                      user=user)

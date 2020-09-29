@@ -8,14 +8,13 @@
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <div class="post-heading">
-                        <h1>{{post.title}}</h1>
-                        <h2 class="subheading">{{post.subtitle}}</h2>
-                        <span class="meta">Posted by {{post.user.username}} on {{post.date.strftime('%B %d, %Y')}}</span>
-                        {% if post.user == current_user %}
+                        <h1>{{blog_item.title}}</h1>
+                        <span class="meta">Posted by {{blog_item.username}} on {{blog_item.date.strftime('%B %d, %Y')}}</span>
+                        {% if blog_item.user == current_user %}
                         <div>
     
                             <a class="btn btn-secondary btn-sm mt-1 mb-1"
-                                href="{{ url_for('main.update_post', post_id=post.id) }}">Update</a>
+                                href="{{ url_for('main.update_post', blog_id=blog_item.id) }}">Update</a>
                             <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal"
                                 data-target="#deleteModal">Delete</button>
                         </div>
@@ -34,7 +33,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <form action="{{ url_for('main.delete_post', post_id=post.id) }}" method="POST">
+                                    <form action="{{ url_for('main.delete_post', blog_id=blog_item.id) }}" method="POST">
                                         <input class="btn btn-danger" type="submit" value="Delete">
                                     </form>
                                 </div>
@@ -51,8 +50,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
-                    {{post.content|safe}}
-                    <p><a class="btn btn-primary btn-sm mt-1 mb-1" href="{{ url_for('main.new_comment',id=post.id) }}">Add
+                    {{blog_item.content|safe}}
+                    <p><a class="btn btn-primary btn-sm mt-1 mb-1" href="{{ url_for('main.new_comment',id=blog_item.id) }}">Add
                             comment</a></p>
                     <hr>
                 </div>
@@ -63,7 +62,7 @@
                     <hr>
                     {% for comment in post_comments%}
                     <p>{{comment.comment}}</p>
-                    <p>{{comment.posted.strftime('%B %d, %Y')}}</p>
+                    <p>{{comment.posted_date.strftime('%B %d, %Y')}}</p>
                     <hr>
                     {% endfor%}
                 </div>

@@ -4,7 +4,7 @@ class Config:
     General configuration parent class
     '''
     QUOTES_API_URL = 'http://quotes.stormconsultancy.co.uk/random.json'
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:tom@localhost/blogapp'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:tom@localhost/blogsite'
     SECRET_KEY = os.environ.get('SECRET_KEY')
     UPLOADED_PHOTOS_DEST = 'app/static/photos'
 
