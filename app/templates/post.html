@@ -3,9 +3,11 @@
 {% block content %}
 
     <section class="masthead">
-        <div class="overlay"></div>
+        <div class="overlay" style="background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(../static/images/pexels-freestocksorg-839465.jpg);height:90vh;background-position:center;background-size:cover;">
+            
+        </div>
         <div class="container">
-            <div class="row">
+            <div class="row pt-5">
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <div class="post-heading">
                         <h1>{{blog_item.title}}</h1>
@@ -43,7 +45,6 @@
     
                 </div>
             </div>
-        </div>
         </div>
     </section>
     <article>
