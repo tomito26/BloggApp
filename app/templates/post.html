@@ -3,15 +3,18 @@
 {% block content %}
 
     <section class="masthead">
-        <div class="overlay" style="background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(../static/images/pexels-freestocksorg-839465.jpg);height:90vh;background-position:center;background-size:cover;">
-            
+        <div class="overlay d-flex justify-content-center align-items-center" style="background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(../static/images/pexels-freestocksorg-839465.jpg);height:90vh;background-position:center;background-size:cover;">
+            <div class="text-white">
+                <h1>{{blog_item.title}}</h1>
+                <span>posted by  {{blog_item.user.username}}</span>
+            </div>
         </div>
         <div class="container">
             <div class="row pt-5">
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <div class="post-heading">
-                        <h1>{{blog_item.title}}</h1>
-                        <span class="meta">Posted by {{blog_item.username}} on {{blog_item.date.strftime('%B %d, %Y')}}</span>
+                        
+                        <span class="meta">Posted  on {{blog_item.date.strftime('%B %d, %Y')}}</span>
                         {% if blog_item.user == current_user %}
                         <div>
     
