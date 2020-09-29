@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% endblock %}
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="page-heading">
+                    <h1>Add post</h1>
+                    <span class="subheading">Add your blog post here</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+    
+                {{wtf.quick_form(form)}}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
